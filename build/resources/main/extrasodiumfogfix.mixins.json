@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.padej_.extrasodiumfogfix.mixin",
+  "compatibilityLevel": "JAVA_18",
+  "mixins": [
+  ],
+  "client": [
+    "FogRendererPatchMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

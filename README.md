@@ -1,4 +1,4 @@
-# 🌫️ Vanilla Fog Fix / Фикс ванильного тумана
+# 🌫️ ExtraSodiumFogFix / Фикс ванильного тумана
 
 ## 📜 Description / Описание
 

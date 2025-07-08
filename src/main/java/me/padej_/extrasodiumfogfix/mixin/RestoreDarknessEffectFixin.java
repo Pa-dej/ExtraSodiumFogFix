@@ -27,7 +27,6 @@ public class RestoreDarknessEffectFixin {
             )
     )
     private StatusEffectInstance restoreDarknessEffect(LivingEntity entity, RegistryEntry<StatusEffect> effect) {
-        if (MinecraftClient.getInstance().options.getFov().getValue() == 99) return null;
         return entity.getStatusEffect(StatusEffects.DARKNESS);
     }
 }

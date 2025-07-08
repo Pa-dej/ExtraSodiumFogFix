@@ -21,8 +21,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(value = FogRenderer.class, priority = 1400)
-public abstract class FogRendererPatchFixin {
+public abstract class FogRendererFixin {
 
+    /**
+     * @name Sodium Extra
+     * @id sodium-extra
+     * @class me.flashyreese.mods.sodiumextra.mixin.fog.MixinFogRenderer
+     */
     @Inject(
             method = "applyFog(Lnet/minecraft/client/render/Camera;IZLnet/minecraft/client/render/RenderTickCounter;FLnet/minecraft/client/world/ClientWorld;)Lorg/joml/Vector4f;",
             at = @At(
@@ -66,6 +71,7 @@ public abstract class FogRendererPatchFixin {
             fogData.cloudEnd = fogData.environmentalEnd;
 
         } else if (cameraSubmersionType == CameraSubmersionType.POWDER_SNOW) {
+            // Powder snow fog
             if (entity.isSpectator()) {
                 fogData.environmentalStart = -8.0F;
                 fogData.environmentalEnd = (float) viewDistance * 0.5F;
@@ -77,6 +83,27 @@ public abstract class FogRendererPatchFixin {
             fogData.renderDistanceEnd = fogData.environmentalEnd;
             fogData.skyEnd = fogData.environmentalEnd;
             fogData.cloudEnd = fogData.environmentalEnd;
+        }
+    }
+
+    /**
+     * @name Tweakemore
+     * @id tweakermore
+     * @class me.fallenbreath.tweakermore.mixins.tweaks.mc_tweaks.disableCameraSubmersionFog.BackgroundRendererMixin
+     */
+    @Inject(
+            method = "getCameraSubmersionType",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/render/Camera;getSubmersionType()Lnet/minecraft/block/enums/CameraSubmersionType;"
+            ),
+            cancellable = true)
+    private void getCameraSubmersionType(Camera camera, boolean thick, CallbackInfoReturnable<CameraSubmersionType> cir) {
+        CameraSubmersionType type = camera.getSubmersionType();
+        if (type == CameraSubmersionType.NONE) {
+            cir.setReturnValue(thick ? CameraSubmersionType.DIMENSION_OR_BOSS : CameraSubmersionType.ATMOSPHERIC);
+        } else {
+            cir.setReturnValue(type);
         }
     }
 }

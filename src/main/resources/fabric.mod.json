@@ -9,14 +9,6 @@
   "license": "unlicense",
   "icon": "assets/extrasodiumfogfix/icon.png",
   "environment": "client",
-  "entrypoints": {
-    "client": [
-      "me.padej_.extrasodiumfogfix.client.ExtraSodiumFogFixClient"
-    ],
-    "main": [
-      "me.padej_.extrasodiumfogfix.ExtraSodiumFogFix"
-    ]
-  },
   "mixins": [
     "extrasodiumfogfix.mixins.json"
   ],

@@ -97,7 +97,8 @@ public abstract class FogRendererFixin {
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/render/Camera;getSubmersionType()Lnet/minecraft/block/enums/CameraSubmersionType;"
             ),
-            cancellable = true)
+            cancellable = true
+    )
     private void getCameraSubmersionType(Camera camera, boolean thick, CallbackInfoReturnable<CameraSubmersionType> cir) {
         CameraSubmersionType type = camera.getSubmersionType();
         if (type == CameraSubmersionType.NONE) {
